@@ -1,0 +1,5 @@
+﻿@model IEnumerable<HRManagement.Data.Entities.Personel>
+@foreach (var item in Model)
+{
+        <option  value="@item.ID">@item.FirstName.ToUpper() @item.LastName.ToUpper() </option>
+}

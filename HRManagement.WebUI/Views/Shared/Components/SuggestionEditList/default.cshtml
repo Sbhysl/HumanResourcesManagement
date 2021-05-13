@@ -1,0 +1,10 @@
+﻿@model IEnumerable<HRManagement.Data.Entities.Suggestion>
+@foreach (var item in Model)
+{
+    <span>@item.Description</span>
+    <span>
+    @Html.ActionLink("Güncelle", "Edit", new { ID = item.ID })  @Html.ActionLink("Sil", "Delete", new { ID = item.ID })</span>
+    <br />
+
+
+}

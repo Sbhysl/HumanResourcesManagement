@@ -1,0 +1,31 @@
+﻿@model IEnumerable<HRManagement.Data.Entities.Personel>
+
+@{
+    Layout = "_LayoutSirketYoneticisi";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+
+            <th scope="col">Ad</th>
+            <th scope="col">Soyad</th>
+            <th scope="col">Doğum Günü</th>
+            <th scope="col">Mail</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.FirstName</td>
+                <td>@item.LastName</td>
+                <td>@item.BirthDay.ToShortDateString()</td>
+                <td>@item.Mail</td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+

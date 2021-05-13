@@ -1,0 +1,93 @@
+﻿@model HRManagement.Data.Entities.Suggestion
+@{
+    Layout = "_LayoutSirketYoneticisi";
+}
+<div class="row">
+    <div class="col-md-2">
+        
+    </div>
+    <div class="col-md-6">
+        <form>
+            <div class="form-group">
+                <label for="inputAddress">Şirket Adı</label>
+                <input readonly type="text" class="form-control" id="inputAddress" placeholder="Şirket adı">
+            </div>
+            <select class="custom-select">
+                <option selected>Yorum türü seçiniz</option>
+                <option value="1">Olumlu Görüşleriniz</option>
+            </select>
+
+        </form>
+        <br />
+        @if (Model.ID != null && Model.ID != 0)
+        {
+            <form method="post" enctype="multipart/form-data" asp-action="Update" asp-controller="Suggestion">
+                <div class="form-group">
+                    <label asp-for="SuggestionTypes"></label>
+                    <div class="col">
+                        <select asp-for="SuggestionTypes" class="form-control" asp-items="@Html.GetEnumSelectList<HRManagement.Data.Entities.SuggestionTypes>()"></select>
+                    </div>
+                </div>
+                <input type="hidden" name="ID" value="@Model.ID" />
+
+                <input type="hidden" name="IsActive" value="@Model.IsActive" />
+
+                <input type="hidden" name="ModifiedDate" value="@Model.ModifiedDate" />
+
+                <input type="hidden" name="CreatedDate" value="@Model.CreatedDate" />
+
+
+
+                <div class="form-group">
+                    <div class="col">
+                        <textarea style="height:200px" class="form-control" name="Description" placeholder="Yorumunuz"></textarea> 
+                    </div>
+                </div>
+                <br />
+                <button type="submit" class="btn btn btn-outline-primary"> Güncelle </button>
+            </form>
+
+
+        }
+        else
+        {
+            <form method="post" enctype="multipart/form-data" asp-action="AddSuggestion" asp-controller="Suggestion">
+                <div class="form-group">
+                    <label asp-for="SuggestionTypes"></label>
+                    <div class="col">
+                        <select asp-for="SuggestionTypes" class="form-control" asp-items="@Html.GetEnumSelectList<HRManagement.Data.Entities.SuggestionTypes>()"></select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col">
+                        <textarea style="height:200px" class="form-control" name="Description" placeholder="Yorumunuz"></textarea>
+                    </div>
+                </div>
+                <br />
+                <div class="form-group">
+                    <div class="form-check">
+                        <input asp-for="IsChecked" class="form-check-input" type="checkbox" id="gridCheck">
+                        <label class="form-check-label" for="gridCheck">
+                            Yorumumun yayınlanmasına izin veriyorum.
+                        </label>
+                    </div>
+                </div>
+                <br />
+                <button type="submit" class="btn btn-outline-primary"> Gönder </button>
+            </form>
+        }
+    </div>
+    <div class="col-md-4">
+        <div class="card p-3">
+            <h6 class="card-title"><span class="bi bi-people"> Yapılan Yorumlar Listesi</span></h6>
+            <blockquote class="blockquote mb-0 card-body">
+
+                <small class="text-muted">
+                    @await Component.InvokeAsync("SuggestionEditList")
+
+                </small>
+            </blockquote>
+        </div>
+    </div>
+
+</div>

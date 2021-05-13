@@ -1,0 +1,10 @@
+﻿@model IEnumerable<HRManagement.Data.Entities.OffDay>
+
+@foreach (var item in Model)
+{
+<span>@item.OffDayType @Html.ActionLink("Güncelle", "Edit", new { ID = item.ID })  @Html.ActionLink("Sil", "Delete", new { ID = item.ID })</span><br />
+  
+   
+}
+
+

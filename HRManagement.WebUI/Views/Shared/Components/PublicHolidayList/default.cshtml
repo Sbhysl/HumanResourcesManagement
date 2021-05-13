@@ -1,0 +1,27 @@
+﻿@model IEnumerable<HRManagement.Data.Entities.PublicHolidays>
+
+
+
+
+<table>
+    <tr>
+        <th>Resmi Tatil Ad</th>
+        <th>Başlangıç - Bitiş Tarihi</th>
+    </tr>
+    @if (Model != null) {
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td style="padding-right:2%">
+                @item.Name
+            </td>
+            <td>
+                <span>@item.StartDate</span>
+                <span>@item.EndDate</span>
+                
+
+            </td>
+        </tr>
+
+    }}
+</table>

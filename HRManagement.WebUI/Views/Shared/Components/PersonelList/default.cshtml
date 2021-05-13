@@ -1,0 +1,13 @@
+﻿
+@model IEnumerable<HRManagement.Data.Entities.Personel>
+
+<div class="form-group">
+    <label for="exampleFormControlSelect2">Example multiple select</label>
+    <select multiple class="form-control" id="exampleFormControlSelect2">
+        @foreach (var item in Model)
+        {
+            <option>@item.FirstName.ToUpper() @item.LastName.ToUpper()</option>
+        }
+
+    </select>
+</div>

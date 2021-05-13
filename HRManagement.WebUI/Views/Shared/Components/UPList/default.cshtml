@@ -1,0 +1,33 @@
+﻿@model IEnumerable<HRManagement.Data.Entities.Personel>
+
+@{
+    Layout = "_LayoutSirketYoneticisi";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+
+            <th scope="col">Ad</th>
+            <th scope="col">Soyad</th>
+            <th scope="col">Ödenecek Tutar</th>
+            <th scope="col">Son Ödeme Tarihi</th>
+            <th scope="col">Mail</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.FirstName</td>
+                <td>@item.LastName</td>
+                <td>@item.Expens TL</td>
+                <td>@item.PaymentsLastDay.Value.ToLongDateString()</td>
+                <td>@item.Mail</td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+

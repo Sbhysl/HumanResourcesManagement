@@ -1,0 +1,45 @@
+﻿@model IEnumerable<HRManagement.Data.Entities.Company>
+
+
+
+
+<div class="row">
+    <div class="col-md-1">
+
+    </div>
+    <div class="col-md-11">
+        <table class="table">
+            <thead>
+                <tr>
+                    
+                    <th scope="col">Şirket Logo</th>
+                    <th scope="col">Şirket Adı</th>
+                    <th scope="col">Adres</th>
+                    <th scope="col">Vergi Numarası</th>
+                    <th scope="col">Telefon</th>
+                </tr>
+            </thead>
+
+            @foreach (var item in Model)
+            {
+                <tbody>
+                    <tr>
+                        <td>
+                            <img src="@item.Logo" style="width:50px; border-radius: 50%;" />
+
+                        </td>
+                        <td>@item.CompanyName </td>
+                        <td>@item.Adress</td>
+                        <td>@item.TaxNumber</td>
+                        <td>@item.TelNumber</td>
+                        <span>@Html.ActionLink("edit", "Edit", new { ID = item.ID })</span>
+                    </tr>
+
+                </tbody>
+            }
+
+
+        </table>
+
+    </div>
+</div>

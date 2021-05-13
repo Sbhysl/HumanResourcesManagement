@@ -1,0 +1,40 @@
+﻿@model HRManagement.Data.Entities.Personel
+
+
+<table class="table">
+    <tr>
+        <figure class="figure">
+            <img class="rounded mx-auto d-block" height="256px" width="256px" src="~/images/@Model.ProfilPicUrl" class="figure-img img-fluid rounded" alt="...">
+            <figcaption class="figure-caption">Mevcut profil resminiz.</figcaption>
+        </figure>
+    </tr>
+    <tr>
+        <td><span>İsim:</span></td>
+        <td><span>@Model.FirstName</span></td>
+    </tr>
+    <tr>
+    <td><span>Soyad:</span></td>
+    <td><span>@Model.LastName</span></td>
+    </tr>
+    <tr>
+    <td><span>Departman:</span></td>
+    <td><span>@Model.Departments</span></td>
+    </tr>
+    <tr>
+    <td><span>Mail:</span></td>
+    <td><span>@Model.Mail</span></td>
+    </tr>
+    <tr>
+    <td><span>Telefon:</span></td>
+    <td><span>@Model.Phone</span></td>
+    </tr>
+    <tr>
+    <td><span>Role:</span></td>
+    <td><span>@Model.Role</span></td>
+    </tr>
+
+</table>
+
+<a class="btn btn-primary btn-block" asp-controller="Settings"
+   asp-action="UserEdit"
+   asp-route-ID="@Model.ID">Düzenle</a>

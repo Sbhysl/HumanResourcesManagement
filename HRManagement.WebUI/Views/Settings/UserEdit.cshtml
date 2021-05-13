@@ -1,0 +1,98 @@
+﻿@model HRManagement.Data.Entities.Personel
+
+<form method="post" enctype="multipart/form-data" asp-action="UserUpdate" asp-controller="Settings">
+
+    <input type="hidden" name="ID" value="@Model.ID" />
+
+    <div class="form-group row">
+
+        @if (Model.ProfilPicUrl == null)
+        {
+            <img id="displayImage" src="~/images/user.png" class="rounded mx-auto d-block" height="200px" width="200px" />
+            
+            /*Buraya bi null foto koyabiliriz. */
+        }
+        else
+        {
+            <img id="displayImage" src="~/images/@Model.ProfilPicUrl" class="rounded mx-auto d-block" height="200px" width="200px" />
+        }
+
+
+        <div class="col-sm-12">
+            <input type="file" class="dataInputs form-control" value="@Model.ProfilPicUrl" name="profilPicUrl" id="inputGroupFile02" onchange="readURL(this);" placeholder="Profil Resmi yükle" />
+            <label class="input-group-text" for="inputGroupFile02">Profil Resmi yükle</label>
+        </div>
+
+
+        <div class="col-sm-12">
+            <input class="form-control form-control-lg" type="text" name="FirstName" value="@Model.FirstName" placeholder="Şirket Adı"><br />
+        </div>
+        <div class="col-sm-12">
+            <input class="form-control form-control-lg" type="text" name="LastName" value="@Model.LastName" placeholder="Adres"><br />
+        </div>
+        <div class="col-sm-12">
+            <input class="form-control form-control-lg" type="email" name="Mail" value="@Model.Mail" placeholder="Telefon Numarası"><br />
+        </div>
+        <div class="col-sm-12">
+            <input class="form-control form-control-lg" type="text" name="Phone" value="@Model.Phone" placeholder="Vergi Numarası"><br />
+        </div>
+
+
+
+
+
+        @*<div class="col-sm-12">
+            <input class="form-control form-control-lg" type="image" name="Logo" value="@Model.Logo" placeholder="Logo">
+        </div>*@
+
+
+
+
+
+
+    </div>
+
+
+    <button type="submit" class="btn btn-block btn-secondary"> Güncelle </button>
+
+
+
+
+
+</form>
+
+
+
+@section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script src="~/twitter-bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/jquery/jquery.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="~/twitter-bootstrap/js/tinymce.min.js"></script>
+
+    <script>
+
+
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#displayImage')
+                        .attr('src', e.target.result)
+                        .width(200)
+                        .height(200);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+    </script>
+
+
+
+}

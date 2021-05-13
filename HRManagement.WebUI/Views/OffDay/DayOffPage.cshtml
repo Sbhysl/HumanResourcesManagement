@@ -1,0 +1,185 @@
+﻿@model HRManagement.Data.Entities.OffDay
+@{
+    Layout = "_LayoutSirketYoneticisi";
+}
+
+<div class="row">
+    <div class="col-md-1">
+
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label for="exampleFormControlSelect2">Personel Listesi</label>
+            <select multiple class="form-control" id="exampleFormControlSelect2" style="height:325px;width:300px">
+                @await Component.InvokeAsync("PersonelListizinler")
+            </select>
+            <br />
+            <a id="onaylabtn" class="btn btn-outline-primary"> İzni onayla</a>
+            <a class="btn btn-outline-primary"> İzni reddet</a>
+        </div>
+    </div>
+    <div class="col-md-1">
+
+    </div>
+    <div class="col-md-4">
+
+        @if (Model.ID != null && Model.ID != 0)
+        {
+            <form method="post" enctype="multipart/form-data" asp-action="Update" asp-controller="OffDay">
+
+                <input type="hidden" name="ID" value="@Model.ID" />
+
+                <input type="hidden" name="IsActive" value="@Model.IsActive" />
+
+                <input type="hidden" name="ModifiedDate" value="@Model.ModifiedDate" />
+
+                <input type="hidden" name="CreatedDate" value="@Model.CreatedDate" />
+
+
+
+                <div class="form-group">
+                    <div class="col">
+                        <input class="form-control" type="text" name="OffDayType" value="@Model.OffDayType" placeholder="İzin adı">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn btn-outline-primary"> Güncelle </button>
+            </form>
+
+
+        }
+        else
+        {
+            <form method="post" enctype="multipart/form-data" asp-action="AddOffDay" asp-controller="OffDay">
+
+                <div class="form-group">
+                    <div class="col">
+                        <h6>İzin Türü Ekle</h6>
+                        <input class="form-control" type="text" name="OffDayType" value="@Model.OffDayType" placeholder="İzin adı">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-outline-primary"> Kaydet </button>
+            </form>
+        }
+        <div class="card p-3">
+            <h6 class="card-title"><span class="bi bi-people"> İzin Türü Listesi</span></h6>
+            <blockquote class="blockquote mb-0 card-body" style="width:300px">
+
+                <small class="text-muted">
+                    @await Component.InvokeAsync("OffDayList")
+
+                </small>
+            </blockquote>
+        </div>
+
+    </div>
+    <div class="col-md-3">
+
+        <h6>Genel İzin Hakları Tablosu</h6>
+        <div id="piechart_div" style="left:0"></div>
+
+
+        <script src="~/js/jquery-3.6.0.min.js"></script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script>
+          
+            $(document).ready(function () {
+                var selectedPersonel=0;
+                $("select#exampleFormControlSelect2").change(function () {
+                    selectedPersonel = $(this).children("option:selected").val();
+                   
+                });
+                $("#onaylabtn").click(function () {
+                    /* $(this).attr('asp-route-ID', selectedPersonel);*/
+                    window.location.href = "http://localhost:58472/PersonalManagement/Detail/" + selectedPersonel;
+                });
+                $.ajax({
+                    type: 'GET',
+                    dataType: "json",
+                    contentType: "application/json",
+                    /*controller/action*/
+                    url: '/chart/VisualizeDepartmantResult',
+                    success: function (result) {
+                        google.charts.load('current', {
+                            'packages': ['corechart']
+                        });
+                        google.charts.setOnLoadCallback(function () {
+                            drawChart(result);
+                        });
+                    }
+                });
+
+                function drawChart(result) {
+
+                    var data = new google.visualization.DataTable();
+                    data.addColumn('string', 'Name');
+                    data.addColumn('number', 'Quantity');
+                    var dataArray = [];
+                    /*ajaxtan gelen veri burda dolduruluyor*/
+                    $.each(result, function (i, obj) {
+                        dataArray.push([obj.id, obj.value]);
+                    });
+
+                    data.addRows(dataArray);
+
+                    //renk,font,boyut ayarları alttaki optionsta
+
+                    var piechart_options = {
+                        //title: 'İzin Durumu',
+                        width: 350,
+                        height: 200,
+                        pieHole: 0.4, slices: {
+                            0: { color: "#e6c000" },
+                            1: { color: "rgb(167, 152, 150)" }
+                        }
+                    };
+
+                    //alttaki kısımda piechart yazan yere ColumnChart, candlechart gibi şeyler yazıp tipi değiştirebiliyoruz detaylı bilgi
+                    //https://developers-dot-devsite-v2-prod.appspot.com/chart/interactive/docs/gallery/columnchart
+
+                    var piechart = new google.visualization.PieChart(document
+                        .getElementById('piechart_div'));
+                    piechart.draw(data, piechart_options);
+
+                }
+
+
+            });
+        </script>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-1">
+
+    </div>
+    <div class="col-md-11">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Ad</th>
+                    <th scope="col">Soyad</th>
+                    <th scope="col">İzin Türü</th>
+                    <th scope="col">İzne çıkış tarihi</th>
+                    <th scope="col">İzinden dönüş Tarihi</th>
+                    <th scope="col">Mail</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>sabiha</td>
+                    <td>uysal</td>
+                    <td>yıllık izin</td>
+                    <td>05.04.2021</td>
+                    <td>10.05.2021</td>
+                    <td>sabiha@gmail.com</td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+</div>
+

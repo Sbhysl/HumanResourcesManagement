@@ -1,0 +1,76 @@
+﻿@model IEnumerable<HRManagement.Data.Entities.Personel>
+
+
+
+
+
+@*@foreach (var item in Model)
+{
+
+    <div class="container">
+        <div class="row">
+            <div class="card" style="width: 15rem;">
+                <div class="col-lg-9">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.FirstName @item.LastName</h5>
+                        <p class="card-text">@item.Departments</p>
+                        <p class="card-text">@item.Mail</p>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+}*@
+
+
+
+
+    <div class="row">
+        <div class="col-md-1">
+
+        </div>
+        <div class="col-md-11">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Ad</th>
+                        <th scope="col">Soyad</th>
+                        <th scope="col">Departman</th>
+                        <th scope="col">Mail</th>
+                        <th scope="col">İşlemler</th>
+                        
+                    </tr>
+                </thead>
+
+                @foreach (var item in Model)
+                {
+                    <tbody>
+                        <tr>
+                            <td>@item.FirstName </td>
+                            <td>@item.LastName</td>
+                            <td>@item.Departments</td>
+                            <td>@item.Mail</td>
+                            <td>@Html.ActionLink("edit", "Edit", new { ID = item.ID })|@Html.ActionLink("delete", "Delete", new { ID = item.ID })|<a asp-action="Detail" asp-controller="PersonalManagement" asp-route-ID="@item.ID" class="btn btn-outline-danger">Detay</a>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                }
+
+
+            </table>
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+

@@ -1,0 +1,54 @@
+﻿@{
+    Layout = "_LayoutSirketYoneticisi";
+}
+@model HRManagement.Data.Entities.OffDay
+
+<div class="col">
+    <h6>İzin Türü Ekle</h6>
+    <input type="text" class="form-control" placeholder="İzin adı">
+    <br />
+    <a class="btn btn-outline-primary"> Kaydet</a>
+    <a class="btn btn-outline-primary"> Güncelle</a>
+    <a class="btn btn-outline-primary"> Sil</a>
+</div>
+<br />
+@await Component.InvokeAsync("OffDayEditList")
+
+@if (Model.ID != null && Model.ID != 0)
+{
+    <form method="post" enctype="multipart/form-data" asp-action="Update" asp-controller="OffDay">
+
+        <input type="hidden" name="ID" value="@Model.ID" />
+
+        <input type="hidden" name="IsActive" value="@Model.IsActive" />
+
+        <input type="hidden" name="ModifiedDate" value="@Model.ModifiedDate" />
+
+        <input type="hidden" name="CreatedDate" value="@Model.CreatedDate" />
+
+
+
+        <div class="form-group row">
+            <div class="col-sm-12">
+                <input class="form-control form-control-lg" type="text" name="OffDayType" value="@Model.OffDayType" placeholder="Özel Gün Adı">
+            </div>
+        </div>
+  
+        <button type="submit" class="btn btn-block btn-secondary"> Kaydet </button>
+    </form>
+
+
+}
+else
+{
+    <form method="post" enctype="multipart/form-data" asp-action="AddOffDay" asp-controller="OffDays">
+
+        <div class="form-group row">
+            <div class="col-sm-12">
+                <input class="form-control form-control-lg" type="text" name="OffDayType" value="@Model.OffDayType" placeholder="Özel Gün Adı">
+            </div>
+        </div>
+  
+        <button type="submit" class="btn btn-block btn-secondary"> Kaydet </button>
+    </form>
+}

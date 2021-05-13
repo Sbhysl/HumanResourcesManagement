@@ -1,0 +1,110 @@
+﻿@{
+    Layout = "_LayoutPersonel";
+}
+
+<br />
+<br />
+
+<div class="card-columns">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Resmi Tatiller</h5>
+            @await Component.InvokeAsync("PublicHolidayList")
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">İzin Grafiğim</h5>
+
+
+            <div id="piechart_div" style="left:0"></div>
+
+
+            <script src="~/js/jquery-3.6.0.min.js"></script>
+            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+            <script>
+                $(document).ready(function () {
+
+                    $.ajax({
+                        type: 'GET',
+                        dataType: "json",
+                        contentType: "application/json",
+                        /*controller/action*/
+                        url: '/chart/VisualizeDepartmantResult',
+                        success: function (result) {
+                            google.charts.load('current', {
+                                'packages': ['corechart']
+                            });
+                            google.charts.setOnLoadCallback(function () {
+                                drawChart(result);
+                            });
+                        }
+                    });
+
+                    function drawChart(result) {
+
+                        var data = new google.visualization.DataTable();
+                        data.addColumn('string', 'Name');
+                        data.addColumn('number', 'Quantity');
+                        var dataArray = [];
+                        /*ajaxtan gelen veri burda dolduruluyor*/
+                        $.each(result, function (i, obj) {
+                            dataArray.push([obj.id, obj.value]);
+                        });
+
+                        data.addRows(dataArray);
+
+                        //renk,font,boyut ayarları alttaki optionsta
+
+                        var piechart_options = {
+                            //title: 'İzin Durumu',
+                            width: 320,
+                            height: 200,
+                            pieHole: 0.4, slices: {
+                                0: { color: "#e6c000" },
+                                1: { color: "rgb(167, 152, 150)" }
+                            }
+                        };
+
+                        //alttaki kısımda piechart yazan yere ColumnChart, candlechart gibi şeyler yazıp tipi değiştirebiliyoruz detaylı bilgi
+                        //https://developers-dot-devsite-v2-prod.appspot.com/chart/interactive/docs/gallery/columnchart
+
+                        var piechart = new google.visualization.PieChart(document
+                            .getElementById('piechart_div'));
+                        piechart.draw(data, piechart_options);
+
+                    }
+
+
+                });
+            </script>
+        </div>
+    </div>
+    <div class="card">
+        
+        <div class="card-body">
+            <h5 class="card-title">İzin Tarihlerim</h5>
+            <p class="card-text">İzin tarihleri listem gelecek</p>
+           
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

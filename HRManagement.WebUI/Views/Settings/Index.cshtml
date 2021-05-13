@@ -1,0 +1,27 @@
+﻿@model HRManagement.Data.Entities.Personel
+@{
+    Layout = "_LayoutSirketYoneticisi";
+}
+
+
+
+
+<div class="container-fluid row" style="margin-top:3%;margin-bottom:3%">
+    <div class="col-12 align-content-center justify-content-center">
+        <div class="row">
+            <div class="col-6">
+                @await Component.InvokeAsync("PackageUsageChart")
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-6">
+                @await Component.InvokeAsync("CompanySettings", new { personel = Model })
+            </div>
+            <div class="col-6">
+                @await Component.InvokeAsync("UserSettings", new { personel = Model })
+            </div>
+        </div>
+    </div>
+
+

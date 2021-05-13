@@ -1,0 +1,14 @@
+﻿
+@model IEnumerable<HRManagement.Data.Entities.Personel>
+
+@foreach (var item in Model)
+{
+    <small class="text-muted">
+        <div class="row">
+            <div class="row">Ödeme Yapılacak Çalışan:@item.FirstName.ToUpper() @item.LastName.ToUpper()</div>
+            <div class="row">Ödenecek Tutar:@item.Expens TL</div>
+            <div class="row">Son Ödeme Tarihi:@item.PaymentsLastDay.Value.ToLongDateString()</div>
+        </div>
+    </small>
+    <br />
+}

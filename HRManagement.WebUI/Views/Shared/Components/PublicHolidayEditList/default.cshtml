@@ -1,0 +1,57 @@
+﻿@model IEnumerable<HRManagement.Data.Entities.PublicHolidays>
+
+<style>
+    .column {
+        float: left;
+        width: 20%;
+    }
+</style>
+<div class="card w-75">
+    <div class="card-header">
+        Resmi Tatiller
+    </div>
+    <div class="card-body ">
+
+        <table>
+            @if (Model != null)
+            {
+                @foreach (var item in Model)
+                {
+
+            <div class="row">
+                <div class="column"> @item.Name</div>
+                <div class="column">@item.StartDate</div>
+                <div class="column">@item.EndDate</div>
+                <div class="column">@Html.ActionLink("Düzenle", "Edit", new { ID = item.ID })</div>
+                <div class="column">@Html.ActionLink("Sil", "Delete", new { ID = item.ID })</div>
+            </div>
+                  
+                    
+                    
+                    
+                    @*<tr>
+                        <td style="padding-right:2%">
+                            @item.Name
+                        </td>
+                        <td>
+                            <span>@item.StartDate</span>
+                            <span>@item.EndDate</span>
+                        </td>
+                        <td>
+
+                            <span>@Html.ActionLink("edit", "Edit", new { ID = item.ID })</span>
+
+                        </td>
+                        <td>
+
+                            <span>
+                                @Html.ActionLink("delete", "Delete", new { ID = item.ID })
+                            </span>
+                        </td>
+                    </tr>*@
+
+                }}
+        </table>
+    </div>
+</div>
+

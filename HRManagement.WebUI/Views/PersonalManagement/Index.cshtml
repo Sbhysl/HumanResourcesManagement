@@ -1,0 +1,254 @@
+﻿@model HRManagement.Data.Entities.Personel
+@{
+    Layout = "_LayoutSirketYoneticisi";
+}
+
+
+<br />
+<br />
+
+@await Component.InvokeAsync("PersonalsEditList")
+
+@if (Model.ID != null && Model.ID != 0)
+{
+<form method="post" enctype="multipart/form-data" asp-action="Update" asp-controller="PersonalManagement">
+
+
+
+
+    <input type="hidden" name="ID" value="@Model.ID" />
+
+    <input type="hidden" name="IsActive" value="@Model.IsActive" />
+
+    <input type="hidden" name="ModifiedDate" value="@Model.ModifiedDate" />
+
+    <input type="hidden" name="CreatedDate" value="@Model.CreatedDate" />
+
+
+    <div class="form-group row">
+        <div class="col-sm-12">
+            <input class="form-control form-control-lg" type="text" name="FirstName" value="@Model.FirstName" placeholder="Çalışan Ad">
+        </div>
+        <div class="col-sm-12">
+            <input class="form-control form-control-lg" type="text" name="LastName" value="@Model.LastName" placeholder="Çalışan Soyad">
+        </div>
+        <div class="col-sm-12">
+            <input class="form-control form-control-lg" type="text" name="Mail" value="@Model.Mail" placeholder="Mail Adresi">
+        </div><br />
+        <div class="col-sm-12">
+            <label for="exampleFormControlSelect2">Çalışan Departman</label>
+            <select multiple class="form-control" id="exampleFormControlSelect2" name="Departments" value="@Model.Departments">
+                <option value="finance">Finans</option>
+                <option value="customerService">Müşteri Hizmetleri</option>
+                <option value="informationTech">IT</option>
+                <option value="humanResource">İnsan Kaynakları</option>
+                <option value="marketing">Pazarlama</option>
+            </select><br />
+        </div>
+
+    </div>
+
+
+    <button type="submit" class="btn btn-block btn-secondary"> Kaydet </button>
+</form>
+
+
+}
+else
+{
+    <br /><br />
+<form method="post" enctype="multipart/form-data" asp-action="AddPersonel" asp-controller="PersonalManagement">
+
+
+    
+        <div class="col-sm-12">
+            <input class="form-control form-control-lg" type="text" name="FirstName" value="@Model.FirstName" placeholder="Ad"><br />
+        </div>
+        <div class="col-sm-12">
+            <input class="form-control form-control-lg" type="text" name="LastName" value="@Model.LastName" placeholder="Soyad"><br />
+        </div>
+        <div class="col-sm-12">
+            <input class="form-control form-control-lg" type="text" name="Mail" value="@Model.Mail" placeholder="Mail Adresi"><br />
+        </div>
+              <div class="col-sm-12">
+                  <label for="exampleFormControlSelect2">Çalışan Departman</label>
+                  <select multiple class="form-control" id="exampleFormControlSelect2" name="Departments" value="@Model.Departments">
+                      <option value="finance">Finans</option>
+                      <option value="customerService">Müşteri Hizmetleri</option>
+                      <option value="informationTech">IT</option>
+                      <option value="humanResource">İnsan Kaynakları</option>
+                      <option value="marketing">Pazarlama</option>
+                  </select><br />
+              </div>
+
+   
+
+    <button type="submit" class="btn btn-block btn-secondary"> Kaydet </button>
+</form>
+}
+<br />
+<div class="col-md-4">
+    <div class="form-group">
+        <label for="exampleFormControlSelect2">Personel Listesi</label>
+        <select multiple class="form-control" id="exampleFormControlSelect2" style="height:325px;width:350px">
+            @await Component.InvokeAsync("PersonelListizinler")
+        </select>
+        <br />
+        <a class="btn btn-outline-primary"> İzni onayla</a>
+        <a class="btn btn-outline-primary"> İzni reddet</a>
+    </div>
+</div>
+
+
+
+
+<br />
+<br />
+<hr />
+<br />
+<br />
+@*
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="card" style="width: 18rem;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <span class="card-title">Çalışan Ad Soyad</span><br />
+                        <span class="card-title">Departmanı</span>
+                        <hr />
+                        <p class="card-text">İşe Başlama Tarihi:</p>
+                        <p class="card-text">Departman:</p>
+                        <p class="card-text">Mail Adresi:</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-1"></div>
+            <div class="col-lg-8">
+                <div class="card" style="width: 50rem;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="form-group">
+                        @if (Model.ID != null && Model.ID != 0)
+                        {
+
+                        <form method="post" enctype="multipart/form-data" asp-action="Update" asp-controller="PersonalManagement">
+
+                            <input type="hidden" name="ID" value="@Model.ID" />
+
+                            <input type="hidden" name="IsActive" value="@Model.IsActive" />
+
+                            <input type="hidden" name="ModifiedDate" value="@Model.ModifiedDate" />
+
+                            <input type="hidden" name="CreatedDate" value="@Model.CreatedDate" />
+
+
+
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">Çalışan Adı:</label>
+                                <input type="text" class="form-control" id="exampleFormControlInput1" value="@Model.FirstName" placeholder="Ad">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">Çalışan Soyadı:</label>
+                                <input type="text" class="form-control" id="exampleFormControlInput1" value="@Model.LastName" placeholder="Soyad">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">İşe Başlama Tarihi:</label>
+                                <input type="text" class="form-control" id="exampleFormControlInput1" value="@Model.HiredDate  " placeholder="Tarih">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">E-Mail Adresi:</label>
+                                <input type="text" class="form-control" id="exampleFormControlInput1" value="@Model.Mail" placeholder="mail@gmail.com">
+                            </div>
+                            <label for="exampleFormControlSelect2">Çalışan Departman</label>
+                            <select multiple class="form-control" id="exampleFormControlSelect2">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select><br />
+                            <button type="submit" class="btn btn-block btn-secondary"> Kaydet </button>
+
+
+                        </form>
+                        }
+                        else
+                        {
+
+
+
+                    <form method="post" enctype="multipart/form-data" asp-action="AddPersonel" asp-controller="PersonalManagement">
+
+                        <input type="hidden" name="ID" value="@Model.ID" />
+
+                        <input type="hidden" name="IsActive" value="@Model.IsActive" />
+
+                        <input type="hidden" name="ModifiedDate" value="@Model.ModifiedDate" />
+
+                        <input type="hidden" name="CreatedDate" value="@Model.CreatedDate" />
+
+
+                        <div class="form-group">
+                <label for="exampleFormControlInput1">Çalışan Adı:</label>
+                <input type="text" class="form-control" id="exampleFormControlInput1" value="@Model.FirstName" placeholder="Ad">
+            </div>
+                        <div class="form-group">
+                <label for="exampleFormControlInput1">Çalışan Soyadı:</label>
+                <input type="text" class="form-control" id="exampleFormControlInput1" value="@Model.LastName" placeholder="Soyad">
+            </div>
+                        <div class="form-group">
+                <label for="exampleFormControlInput1">İşe Başlama Tarihi:</label>
+                <input type="text" class="form-control" id="exampleFormControlInput1" value="@Model.HiredDate  " placeholder="Tarih">
+            </div>
+                        <div class="form-group">
+                <label for="exampleFormControlInput1">E-Mail Adresi:</label>
+                <input type="text" class="form-control" id="exampleFormControlInput1" value="@Model.Mail" placeholder="mail@gmail.com">
+            </div>
+                        <label for="exampleFormControlSelect2">Çalışan Departman</label>
+            <select multiple class="form-control" id="exampleFormControlSelect2" >
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select><br />
+
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <input class="form-control form-control-lg" type="text" name="Name" value="@Model.FirstName" placeholder="Adı">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <input class="form-control form-control-lg" type="text" name="Name" value="@Model.LastName" placeholder="Soyadı">
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+
+
+                        <button type="submit" class="btn btn-block btn-secondary"> Kaydet </button>
+
+
+                    </form>
+                        }
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />*@
+
+
+
+
+
+

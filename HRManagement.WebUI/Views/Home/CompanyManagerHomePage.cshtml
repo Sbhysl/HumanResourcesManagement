@@ -1,0 +1,96 @@
+﻿
+
+@{
+    Layout = "_LayoutSirketYoneticisi";
+}
+
+<br /><br />
+      <div class="card-columns">
+          @*<div class="card p-3" style="width:400px;padding-right:20px;">
+              @await Component.InvokeAsync("Chart")
+          </div>*@
+
+          <div class="card p-xl-4">
+              <blockquote class="blockquote mb-0 card-body" style="column-width:950px;">
+                  <h5 class="card-title"><span class="bi bi-table" style="width:400px;"> İzin Durumu</span></h5>
+                  <small class="text-muted" style="padding: 2rem .25rem;" >
+                      <span class="row" style="padding-left:-25em;">
+                          @await Component.InvokeAsync("EmployeeLimitChart")
+
+                      </span>
+
+                  </small>
+              </blockquote>
+          </div>
+
+          <div class="card p-3">
+              <blockquote class="blockquote mb-0 card-body">
+                  <h5 class="card-title"><span class="bi bi-people"> Çalışan Listesi</span></h5>
+                  <small class="text-muted">
+                      @await Component.InvokeAsync("GetEmployeeList")
+
+                  </small>
+                  <a asp-controller="Personels" asp-action=""></a>
+              </blockquote>
+          </div>
+
+          <a asp-controller="PublicHolidaysManagement" asp-action="Index">
+              <div class="card p-3">
+                  <blockquote class="blockquote mb-0 card-body">
+                      <h5 class="card-title"><span class="bi bi-table" style="color:black"> Resmi tatiller</span></h5>
+                      <small class="text-muted">
+                          <span class="row">
+                              @await Component.InvokeAsync("PublicHolidayList")
+
+                          </span>
+
+                      </small>
+                  </blockquote>
+              </div>
+          </a>
+          <div class="card p-3">
+              <blockquote class="blockquote mb-0 card-body">
+                  <h5 class="card-title"><a class="bi bi-gift" asp-action="Birthdays" asp-controller="Personels" style="color:black"> Yaklaşan Doğum Günleri</a></h5>
+                  <small class="text-muted">
+                      @await Component.InvokeAsync("UpcomingBirthdates")
+
+                  </small>
+              </blockquote>
+          </div>
+          <div class="card p-3">
+              <blockquote class="blockquote mb-0 card-body">
+                  <h5 class="card-title"><a class="bi bi-wallet2" asp-action="UpcomingPayments" asp-controller="Personels" style="color:black"> Yaklaşan Ödeme Talepleri</a></h5>
+                  <small class="text-muted">
+
+                      @await Component.InvokeAsync("UpcomingPayments")
+                  </small>
+              </blockquote>
+          </div>
+
+      </div>
+
+
+<script>
+    $(document).ready(function () {
+        $("#export").click(function () {
+            ExportToExcel();
+        });
+    });
+
+    function ExportToExcel()
+    {
+        var url = '@Url.Action("GridExportToExcel", "ExportController")';
+        window.open(url);
+    }
+</script>
+    
+
+ 
+
+
+
+
+
+
+
+

@@ -1,0 +1,96 @@
+﻿@model HRManagement.Data.Entities.Company
+
+<form method="post" enctype="multipart/form-data" asp-action="CompanyUpdate" asp-controller="Settings">
+
+    <input type="hidden" name="ID" value="@Model.ID" />
+
+    <div class="form-group row">
+        <div class="col-sm-12">
+            <input class="form-control form-control-lg" type="text" name="CompanyName" value="@Model.CompanyName" placeholder="Şirket Adı"><br />
+        </div>
+        <div class="col-sm-12">
+            <input class="form-control form-control-lg" type="text" name="Adress" value="@Model.Adress" placeholder="Adres"><br />
+        </div>
+        <div class="col-sm-12">
+            <input class="form-control form-control-lg" type="text" name="TelNumber" value="@Model.TelNumber" placeholder="Telefon Numarası"><br />
+        </div>
+        <div class="col-sm-12">
+            <input class="form-control form-control-lg" type="text" name="TaxNumber" value="@Model.TaxNumber" placeholder="Vergi Numarası"><br />
+        </div>
+        <div class="col-sm-12">
+            @if (Model.Logo == null)
+            {
+                <img id="displayImage" src="~/images/user.png" class="rounded mx-auto d-block" height="200px" width="200px" />
+
+                /*Buraya bi null foto koyabiliriz. */
+            }
+            else
+            {
+                <img id="displayImage" src="~/images/@Model.Logo" class="rounded mx-auto d-block" height="200px" width="200px" />
+            }
+
+
+
+            <input type="file" class="dataInputs form-control" value="@Model.Logo" name="logo" id="inputGroupFile02" onchange="readURL(this);" placeholder="Logo Yükle" />
+            <label class="input-group-text" for="inputGroupFile02">Logo Yükle</label>
+        </div>
+
+
+
+
+
+        @*<div class="col-sm-12">
+            <input class="form-control form-control-lg" type="image" name="Logo" value="@Model.Logo" placeholder="Logo">
+        </div>*@
+
+
+
+
+
+
+    </div>
+
+
+    <button type="submit" class="btn btn-block btn-secondary"> Güncelle </button>
+
+
+
+
+
+</form>
+
+
+
+@section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script src="~/twitter-bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/jquery/jquery.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="~/twitter-bootstrap/js/tinymce.min.js"></script>
+
+    <script>
+
+
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#displayImage')
+                        .attr('src', e.target.result)
+                        .width(200)
+                        .height(200);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+    </script>
+
+
+
+}

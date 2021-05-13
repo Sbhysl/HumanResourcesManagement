@@ -1,0 +1,59 @@
+﻿
+
+@model HRManagement.Data.Entities.Company
+
+
+@{
+    Layout = "_LayoutSirketYoneticisi";
+}
+<br /><br />
+
+
+    @await Component.InvokeAsync("CompanyEdit")
+
+<form method="post" enctype="multipart/form-data" asp-action="Update" asp-controller="Company">
+
+    <input type="hidden" name="ID" value="@Model.ID" />
+
+    <div class="form-group row">
+        <div class="col-sm-12">
+            <input class="form-control form-control-lg" type="text" name="CompanyName" value="@Model.CompanyName" placeholder="Şirket Adı"><br />
+        </div>
+        <div class="col-sm-12">
+            <input class="form-control form-control-lg" type="text" name="Adress" value="@Model.Adress" placeholder="Adres"><br />
+        </div>
+        <div class="col-sm-12">
+            <input class="form-control form-control-lg" type="text" name="TelNumber" value="@Model.TelNumber" placeholder="Telefon Numarası"><br />
+        </div>
+        <div class="col-sm-12">
+            <input class="form-control form-control-lg" type="text" name="TaxNumber" value="@Model.TaxNumber" placeholder="Vergi Numarası"><br />
+        </div>
+        <div class="col-sm-12">
+            <label asp-for="Logo" class="control-label"></label>
+            <input type="file" name="file" id="file" class="form-control" asp-for="Logo" /><br />
+        </div>
+
+
+
+
+
+        @*<div class="col-sm-12">
+            <input class="form-control form-control-lg" type="image" name="Logo" value="@Model.Logo" placeholder="Logo">
+        </div>*@
+
+
+        
+
+
+
+    </div>
+
+
+    <button type="submit" class="btn btn-block btn-secondary"> Güncelle </button>
+
+
+
+
+
+</form>
+
